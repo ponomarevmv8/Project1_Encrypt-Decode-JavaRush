@@ -1,5 +1,3 @@
-import java.io.Console;
-import java.util.*;
 
 public class Main {
     private static final String beginning= "######----Encrypt/Decrip Cheaser Chiper's----######\n" +
@@ -13,9 +11,9 @@ public class Main {
         Start start = new Start();
         int selectMode = start.selectMode();
         if(selectMode == 1) {
-
+            Decode decode = new Decode();
         } else {
-            Encrypted encrypted = new Encrypted(start.getShifr());
+            Encrypted encrypted = new Encrypted();
         }
 
 
