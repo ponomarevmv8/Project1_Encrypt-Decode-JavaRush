@@ -15,10 +15,9 @@ public class Start {
             for(int j = 0; j < alphabet.length(); j++) {
                 alphabetShifr.add(alphabet.charAt((j+i) % alphabet.length()));
             }
-            shifr.put(i, alphabetShifr);
+            shifr.put(i, new ArrayList<>(alphabetShifr));
             alphabetShifr.clear();
         }
-
     }
 
 

@@ -1,8 +1,5 @@
 import java.io.Console;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
     private static final String beginning= "######----Encrypt/Decrip Cheaser Chiper's----######\n" +
@@ -18,7 +15,7 @@ public class Main {
         if(selectMode == 1) {
 
         } else {
-
+            Encrypted encrypted = new Encrypted(start.getShifr());
         }
 
 
