@@ -42,12 +42,12 @@ public class Start {
     }
 
     protected void inputText(){
-        System.out.println("Введите пожалуйста текст для зашифровки\nПри завершение набора текста, введите exit");
+        System.out.println("Введите пожалуйста текст для зашифровки\n\n!!!!!При завершение набора текста, нажмите два раза Enter!!!!!");
         Scanner scanner = new Scanner((System.in));
         List<String> text = new ArrayList<>();
-        while (scanner.hasNext()){
+        while (scanner.hasNextLine()){
             String str = scanner.nextLine();
-            if(str.equals("exit")) break;
+            if(str.isEmpty()) break;
             else {
                 text.add(str);
             }
@@ -55,5 +55,7 @@ public class Start {
         for(String str : text){
             inputText += str + " ";
         }
+        //Убираем последний пробел в тексте
+        inputText = inputText.substring(0, inputText.length()-1);
     }
 }
