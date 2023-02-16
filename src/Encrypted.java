@@ -2,9 +2,14 @@ import java.util.*;
 
 public class Encrypted extends Start {
 
-
     public Encrypted() {
         super.inputText();
+        inputKey();
+        encryptedText();
+    }
+
+    public Encrypted(String inputText) {
+        super.inputText = inputText;
         inputKey();
         encryptedText();
     }

@@ -9,12 +9,8 @@ public class Main {
         System.out.println(beginning);
 
         Start start = new Start();
-        int selectMode = start.selectMode();
-        if(selectMode == 1) {
-            Decode decode = new Decode();
-        } else {
-            Encrypted encrypted = new Encrypted();
-        }
+        start.startProgram();
+        
 
 
     }

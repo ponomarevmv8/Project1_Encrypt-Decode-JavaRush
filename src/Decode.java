@@ -14,13 +14,20 @@ public class Decode extends Start{
     public Decode () {
         super.inputText();
         decoding();
+        printResulText();
+    }
+
+    public Decode (String inputText) {
+        super.inputText = inputText.trim();
+        decoding();
+        printResulText();
     }
 
     private void decoding() {
-        for(int key : shifr.keySet()) {
+        for(int key : super.shifr.keySet()) {
             List<Character> alphabetaShifr = shifr.get(key);
-            for(int i = 0; i < inputText.length(); i++) {
-                char ch = inputText.charAt(i);
+            for(int i = 0; i < super.inputText.length(); i++) {
+                char ch = super.inputText.charAt(i);
                 int index = alphabetaShifr.indexOf(ch);
                 if(index == -1) {
                     outChar += ch;
@@ -30,12 +37,11 @@ public class Decode extends Start{
             }
             if(checkResult(outChar)) {
                 this.key = key;
+                System.out.println(outChar);
                 this.outputText = outChar;
             }
             outChar = "";
         }
-
-        printResulText();
     }
 
     private boolean checkResult(String outChar){
@@ -55,13 +61,15 @@ public class Decode extends Start{
         return false;
     }
 
-    private boolean punctuationСheck (String text ) {
+    private boolean punctuationСheck (String text) {
         if(text.indexOf(',') != text.length() - 1) {
             if(text.indexOf(',') != -1) {
+
                 return false;
             }
         }
         if (text.indexOf('.') != text.length() - 1) {
+
             if(text.indexOf('.') != -1) {
                 return false;
             }
@@ -94,8 +102,9 @@ public class Decode extends Start{
         if (this.outputText.equals(this.resultCheckPrepositions)) System.out.println("Расшифрованный текст: " + outputText + "\nКлюч: " + this.key);
         else {
             System.out.println("При расшифровке возникли некоторые трудности....\nОдин из текстов ваша расшифровка");
-            System.out.println("Расшифрованный текст вариант 1: " + outputText + "\nКлюч: " + this.key);
-            System.out.println("Расшифрованный текст вариант 2: " + resultCheckPrepositions + "\nКлюч: " + this.key);
+            System.out.println("Расшифрованный текст вариант 1: " + this.outputText + "\nКлюч: " + this.key);
+            if (!resultCheckPrepositions.equals(""))
+                System.out.println("Расшифрованный текст вариант 2: " + this.resultCheckPrepositions + "\nКлюч: " + this.key);
         }
     }
 }

@@ -11,6 +11,10 @@ public class Start {
     protected Scanner scanner;
 
     public Start(){
+        initAlphabetShifr();
+    }
+
+    protected void  initAlphabetShifr(){
         List<Character> alphabetShifr = new ArrayList<>(alphabet.length());
         for(int i = 0; i < alphabet.length(); i++) {
             for(int j = 0; j < alphabet.length(); j++) {
@@ -20,9 +24,48 @@ public class Start {
             alphabetShifr.clear();
         }
     }
+    public void startProgram() {
+        int selectMode = selectMode();
+        int i = selectPath();
 
 
-    public int selectMode() {
+        if (selectMode == 1) {
+            Decode decode;
+            if(i == 1 ) {
+                WorkingWithFiles files = new WorkingWithFiles();
+                files.readFile();
+                decode = new Decode(files.getInputText());
+            } else {
+                decode = new Decode();
+            }
+            this.outputText = decode.outputText;
+            int j = outputPath();
+            if( j == 1) {
+                WorkingWithFiles files = new WorkingWithFiles();
+                files.setOutputText(this.outputText);
+                files.writeFile();
+            }
+        } else {
+            Encrypted encrypted;
+            if( i == 1) {
+                WorkingWithFiles files = new WorkingWithFiles();
+                files.readFile();
+                encrypted = new Encrypted(files.getInputText());
+            } else {
+                encrypted = new Encrypted();
+
+            }
+            this.outputText = encrypted.outputText;
+            int j = outputPath();
+            if( j == 1) {
+                WorkingWithFiles files = new WorkingWithFiles();
+                files.setOutputText(this.outputText);
+                files.writeFile();
+            }
+        }
+
+    }
+    private int selectMode() {
         System.out.println("          Выберите режим работы программы\n               1. Расшифровка\n               2. Зашифровка\n");
         while (true){
             System.out.print("Выбранный режим: ");
@@ -36,6 +79,44 @@ public class Start {
                 } else {
                     System.out.println("Вы выбрали не существующий режим");
                     System.out.print("Выбранный режим: ");
+                }
+            }
+        }
+    }
+
+    private int selectPath() {
+        System.out.println("Выберите способ вставки текста: \n1. Файл\n2. Ввод");
+        System.out.print("Способ №: ");
+        scanner = new Scanner(System.in);
+        while (true) {
+            while (scanner.hasNextInt()) {
+                int i = scanner.nextInt();
+                if (i == 1) {
+                    return 1;
+                } else if (i == 2) {
+                    return 2;
+                } else {
+                    System.out.println("Вы выбрали не существующий способ");
+                    System.out.print("Способ №: ");
+                }
+            }
+        }
+    }
+
+    private int outputPath(){
+        System.out.println("\nНужно ли записать результат в файл?\n1. Да\n2. Нет");
+        System.out.print("Ваш выбор: ");
+        scanner = new Scanner(System.in);
+        while (true) {
+            while (scanner.hasNextInt()) {
+                int i = scanner.nextInt();
+                if (i == 1) {
+                    return 1;
+                } else if (i == 2) {
+                    return 2;
+                } else {
+                    System.out.println("Вы выбрали не существующий способ");
+                    System.out.print("Ваш выбор: ");
                 }
             }
         }
