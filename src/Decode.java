@@ -1,15 +1,12 @@
 import java.util.*;
 
 public class Decode extends Start{
-
     private String outChar = "";
     private int caountMax = -1;
     private int caountPrepositions = 0;
-
     private String resultCheckPrepositions = "";
 
-    private String[] prepositions = {"В", "Над", "О", "Об", "От", "По", "При", "Про", "С", "Со", "У"};
-
+    private final String[] prepositions = {"В", "Над", "О", "Об", "От", "По", "При", "Про", "С", "Со", "У"};
 
     public Decode () {
         super.inputText();
@@ -37,13 +34,11 @@ public class Decode extends Start{
             }
             if(checkResult(outChar)) {
                 this.key = key;
-                System.out.println(outChar);
                 this.outputText = outChar;
             }
             outChar = "";
         }
     }
-
     private boolean checkResult(String outChar){
         String[] splitMax = outChar.split(" ");
         // Проверка на пунктуацию
@@ -55,41 +50,38 @@ public class Decode extends Start{
         }
         if(splitMax.length > this.caountMax ) {
             this.caountMax = splitMax.length;
-            if(count > this.caountPrepositions) this.resultCheckPrepositions = outChar;
+            if(count > this.caountPrepositions) {
+                this.resultCheckPrepositions = outChar;
+                this.caountPrepositions = count;
+            }
             return true;
         }
         return false;
     }
-
     private boolean punctuationСheck (String text) {
         if(text.indexOf(',') != text.length() - 1) {
-            if(text.indexOf(',') != -1) {
-
+            if (text.indexOf(',') != -1) {
                 return false;
             }
         }
         if (text.indexOf('.') != text.length() - 1) {
-
-            if(text.indexOf('.') != -1) {
+            if (text.indexOf('.') != -1) {
                 return false;
             }
         }
         if (text.indexOf('!') != text.length() - 1) {
-            if(text.indexOf('!') != -1) {
+            if (text.indexOf('!') != -1) {
                 return false;
             }
         }
         if(text.indexOf('?') != text.length() - 1) {
-            if(text.indexOf('?') != -1) {
+            if (text.indexOf('?') != -1) {
                 return false;
             }
         }
         return true;
     }
-
-
     private boolean isPreposition(String word) {
-
         for (String preposition : prepositions) {
             if (word.equalsIgnoreCase(preposition)) {
                 return true;
@@ -97,7 +89,6 @@ public class Decode extends Start{
         }
         return false;
     }
-
     private void printResulText(){
         if (this.outputText.equals(this.resultCheckPrepositions)) System.out.println("Расшифрованный текст: " + outputText + "\nКлюч: " + this.key);
         else {

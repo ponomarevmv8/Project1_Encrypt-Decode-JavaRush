@@ -13,8 +13,6 @@ public class Encrypted extends Start {
         inputKey();
         encryptedText();
     }
-
-
     private void inputKey() {
         super.scanner = new Scanner(System.in);
         while (true) {
@@ -27,11 +25,9 @@ public class Encrypted extends Start {
             }
         }
     }
-
     private void encryptedText() {
         List<Character> alphabet= super.shifr.get(0);
         List<Character> alphabetShifr = super.shifr.get(super.key);
-
         for (int i = 0; i < super.inputText.length(); i++) {
             char ch = super.inputText.toLowerCase().charAt(i);
             int index = alphabet.indexOf(ch);
@@ -40,8 +36,6 @@ public class Encrypted extends Start {
             } else
                 super.outputText += alphabetShifr.get(index).toString();
         }
-
         System.out.println("Ваш закодированный текст: " + super.outputText);
     }
-
 }

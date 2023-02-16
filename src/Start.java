@@ -3,18 +3,17 @@ import java.util.*;
 public class Start {
 
     protected final String alphabet ="абвгдеёжзийклмнопрстуфхцчшщъыьэюя.,\":-!? ";
-    protected final Map<Integer, List<Character>> shifr = new HashMap<>();
-
+    protected Map<Integer, List<Character>> shifr = new HashMap<>();
     protected String inputText ="";
     protected String outputText = "";
     protected int key;
     protected Scanner scanner;
 
     public Start(){
-        initAlphabetShifr();
+        initShifr();
     }
 
-    protected void  initAlphabetShifr(){
+    protected void  initShifr(){
         List<Character> alphabetShifr = new ArrayList<>(alphabet.length());
         for(int i = 0; i < alphabet.length(); i++) {
             for(int j = 0; j < alphabet.length(); j++) {
@@ -27,8 +26,6 @@ public class Start {
     public void startProgram() {
         int selectMode = selectMode();
         int i = selectPath();
-
-
         if (selectMode == 1) {
             Decode decode;
             if(i == 1 ) {
