@@ -24,32 +24,21 @@ public class Start {
         }
     }
     public void startProgram() {
-        int selectMode = selectMode();
-        int i = selectPath();
+        int selectMode = selectMode(); //Выбор режима работы программы
+        int i = selectPath();  //Выбор метода получение текста
         if (selectMode == 1) {
-            Decode decode;
-            if(i == 1 ) {
-                WorkingWithFiles files = new WorkingWithFiles();
-                files.readFile();
-                decode = new Decode(files.getInputText());
-            } else {
-                decode = new Decode();
-            }
-            this.outputText = decode.outputText;
-            int j = outputPath();
-            if( j == 1) {
-                WorkingWithFiles files = new WorkingWithFiles();
-                files.setOutputText(this.outputText);
-                files.writeFile();
-            }
+            if(selectDecodeMod())
+                decodeMod(i);
+            else
+                decodeByKeyMod(i);
         } else {
             Encrypted encrypted;
             if( i == 1) {
                 WorkingWithFiles files = new WorkingWithFiles();
                 files.readFile();
-                encrypted = new Encrypted(files.getInputText());
+                encrypted = new Encrypted(true, files.getInputText());
             } else {
-                encrypted = new Encrypted();
+                encrypted = new Encrypted(true);
 
             }
             this.outputText = encrypted.outputText;
@@ -97,6 +86,62 @@ public class Start {
                     System.out.print("Способ №: ");
                 }
             }
+        }
+    }
+
+    private boolean selectDecodeMod(){
+        System.out.println("\nВыберите способ расшифровки: \n1. Брут-форс\n2. Ввести собственный ключ");
+        while (true){
+            System.out.print("Выбранный способ: ");
+            scanner = new Scanner(System.in);
+            while (scanner.hasNextInt()){
+                int i = scanner.nextInt();
+                if(i == 1) {
+                    return true;
+                } else if (i == 2) {
+                    return false;
+                } else {
+                    System.out.println("Вы выбрали не существующий способ");
+                    System.out.print("Выбранный способ: ");
+                }
+            }
+        }
+    }
+
+    private void decodeMod(int i) {
+        Decode decode;
+        if(i == 1 ) {
+            WorkingWithFiles files = new WorkingWithFiles();
+            files.readFile();
+            decode = new Decode(files.getInputText());
+        } else {
+            decode = new Decode();
+        }
+        this.outputText = decode.outputText;
+        int j = outputPath();
+        if( j == 1) {
+            WorkingWithFiles files = new WorkingWithFiles();
+            files.setOutputText(this.outputText);
+            files.writeFile();
+        }
+    }
+
+    private void decodeByKeyMod(int i) {
+        Encrypted encrypted;
+        if( i == 1) {
+            WorkingWithFiles files = new WorkingWithFiles();
+            files.readFile();
+            encrypted = new Encrypted(false, files.getInputText());
+        } else {
+            encrypted = new Encrypted(false);
+
+        }
+        this.outputText = encrypted.outputText;
+        int j = outputPath();
+        if( j == 1) {
+            WorkingWithFiles files = new WorkingWithFiles();
+            files.setOutputText(this.outputText);
+            files.writeFile();
         }
     }
 
