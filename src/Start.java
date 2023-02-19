@@ -13,7 +13,7 @@ public class Start {
         initShifr();
     }
 
-    protected void  initShifr(){
+    private void  initShifr(){
         List<Character> alphabetShifr = new ArrayList<>(alphabet.length());
         for(int i = 0; i < alphabet.length(); i++) {
             for(int j = 0; j < alphabet.length(); j++) {
@@ -180,5 +180,9 @@ public class Start {
         }
         //Убираем последний пробел в тексте
         inputText = inputText.substring(0, inputText.length()-1);
+    }
+
+    public String getOutputText() {
+        return outputText;
     }
 }

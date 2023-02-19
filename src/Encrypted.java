@@ -19,6 +19,15 @@ public class Encrypted extends Start {
         else
             decodeByKey(key);
     }
+
+    public Encrypted (boolean mode, String inputText, int key){
+        super.inputText = inputText;
+        super.key = key;
+        if(mode)
+            encryptedText();
+        else
+            decodeByKey(key);
+    }
     private void inputKey() {
         super.scanner = new Scanner(System.in);
         while (true) {
@@ -58,4 +67,6 @@ public class Encrypted extends Start {
         }
         System.out.println("Ваш раскодированный текст: " + super.outputText);
     }
+
+
 }

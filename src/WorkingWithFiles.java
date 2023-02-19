@@ -48,6 +48,23 @@ public class WorkingWithFiles {
         }
     }
 
+    public void readFile(String path) {
+        this.path = path;
+        checkPath();
+        try(BufferedReader br = new BufferedReader(new FileReader(path))) {
+            StringBuilder sb = new StringBuilder();
+            String line = br.readLine();
+            while (line != null) {
+                sb.append(line);
+                sb.append(System.lineSeparator());
+                line = br.readLine();
+            }
+            this.inputText = sb.toString();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public void writeFile () {
         enterPath();
         checkPath();
@@ -55,6 +72,21 @@ public class WorkingWithFiles {
             writer.write(this.outputText);
         } catch (IOException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    public boolean writeFile(String path) {
+        if(Files.exists(Paths.get(path))) {
+            this.path = path;
+            try(BufferedWriter writer = new BufferedWriter(new FileWriter(this.path))) {
+                writer.write(this.outputText);
+                return true;
+            } catch (IOException e) {
+                return false;
+            }
+        }
+        else {
+            return false;
         }
     }
 
